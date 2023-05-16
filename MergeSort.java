@@ -1,0 +1,51 @@
+import java.util.Arrays;
+
+public class MergeSort {
+    public static void conquer(int a[], int mid , int si , int ei){
+          int merge[]  = new int[ei-si+1];
+          int idx1 = si;
+          int idx2 = mid+1;
+          int x = 0;
+          while (idx1<=mid && idx2 <= ei) {
+               if(a[idx1]<=a[idx2]){
+                merge[x++]=a[idx1++];
+
+               }
+               else{
+                merge[x++]=a[idx2++];
+               }
+            }
+          while (idx1<=mid) {
+            merge[x++]=a[idx1++];
+              
+         }
+         while (idx2 <= ei) {
+            merge[x++]=a[idx2++];
+          }
+
+          for (int i = 0,j=si; i < merge.length; i++,j++) {
+               a[j]= merge[i];
+            
+          }
+            
+          
+
+
+    }
+    public static void main(String[] args) {
+        int a[]= {3,-1,8,-22,4,5,2};
+        divide(a,0,a.length-1);
+        System.out.println(Arrays.toString(a));
+    }
+    public static void divide(int a[],int si ,int ei) {
+        if(si>=ei){
+            return;// Array Already sorted
+        }
+         int mid = si + (ei - si )/2;
+         divide(a, si, mid);
+         divide(a, mid + 1, ei);
+         conquer(a, mid , si ,ei);
+
+        
+ }
+}
